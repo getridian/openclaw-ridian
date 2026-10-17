@@ -8,7 +8,7 @@ The tools you can use depend on your authorization, connected providers and
 selected resources. This plugin uses OpenClaw's native MCP client and OAuth
 storage; it does not implement a second API or keep its own token store.
 
-**Alpha — 0.1.0-alpha.3.**
+**Alpha — 0.1.0-alpha.4.**
 
 [Ridian](https://getridian.com/?utm_source=openclaw-plugin&utm_medium=referral&utm_campaign=openclaw&utm_content=readme-en)
 · [ClawHub](https://clawhub.ai/getridian/plugins/openclaw-ridian)
@@ -34,7 +34,7 @@ and `cd openclaw-ridian`.
 npm test
 npm run check:package
 npm pack --ignore-scripts
-openclaw plugins install ./getridian-openclaw-ridian-0.1.0-alpha.3.tgz --force --accept-capabilities
+openclaw plugins install ./getridian-openclaw-ridian-0.1.0-alpha.4.tgz --force --accept-capabilities
 ```
 
 The package has no runtime dependencies apart from the OpenClaw host. Its
