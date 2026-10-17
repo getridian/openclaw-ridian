@@ -1,20 +1,64 @@
 {
-  "name": "@kalender-sync/openclaw-ridian",
-  "version": "0.1.0-alpha.1",
-  "description": "Connect OpenClaw to Ridian through its existing MCP and OAuth contracts.",
+  "name": "@getridian/openclaw-ridian",
+  "version": "0.1.0-alpha.2",
+  "description": "OpenClaw plugin for Ridian calendars, tasks, contacts and email through MCP and OAuth.",
   "type": "module",
   "license": "MIT",
   "author": "Ridian",
-  "repository": { "type": "git", "url": "https://github.com/kalender-sync/openclaw-ridian.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getridian/openclaw-ridian.git"
+  },
   "homepage": "https://getridian.com",
-  "engines": { "node": ">=24.16.0 <25 || >=26.1.0" },
-  "peerDependencies": { "openclaw": "2026.10.4" },
-  "peerDependenciesMeta": { "openclaw": { "optional": true } },
-  "files": ["index.js", "openclaw.plugin.json", "README.md", "LICENSE", "docs/setup.de.md", "scripts/connection.mjs"],
-  "scripts": { "test": "node --test test/*.test.mjs", "check:package": "node scripts/check-package.mjs" },
+  "engines": {
+    "node": ">=24.16.0 <25 || >=26.1.0"
+  },
+  "peerDependencies": {
+    "openclaw": "2026.10.4"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "files": [
+    "index.js",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE",
+    "docs/setup.de.md",
+    "scripts/connection.mjs",
+    "assets/icon.png"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check:package": "node scripts/check-package.mjs"
+  },
   "openclaw": {
-    "extensions": ["./index.js"],
-    "compat": { "pluginApi": "2026.10.4", "minGatewayVersion": "2026.10.4" },
-    "build": { "openclawVersion": "2026.10.4", "pluginSdkVersion": "2026.10.4" }
+    "extensions": [
+      "./index.js"
+    ],
+    "compat": {
+      "pluginApi": "2026.10.4",
+      "minGatewayVersion": "2026.10.4"
+    },
+    "build": {
+      "openclawVersion": "2026.10.4",
+      "pluginSdkVersion": "2026.10.4"
+    }
+  },
+  "keywords": [
+    "openclaw",
+    "ridian",
+    "mcp",
+    "oauth",
+    "calendar",
+    "contacts",
+    "tasks",
+    "email",
+    "ai-agents"
+  ],
+  "bugs": {
+    "url": "https://github.com/getridian/openclaw-ridian/issues"
   }
 }

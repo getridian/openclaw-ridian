@@ -17,7 +17,7 @@ docker compose -f test-environment/compose.yaml pull
 docker compose -f test-environment/compose.yaml run --rm --no-deps --entrypoint node gateway \
   /ridian/test-environment/bootstrap.mjs https://YOUR_TEST_RIDIAN_HOST/mcp
 docker compose -f test-environment/compose.yaml run --rm --no-deps --entrypoint node gateway \
-  dist/index.js plugins install /ridian/kalender-sync-openclaw-ridian-0.1.0-alpha.1.tgz --force --accept-capabilities
+  dist/index.js plugins install /ridian/getridian-openclaw-ridian-0.1.0-alpha.2.tgz --force --accept-capabilities
 docker compose -f test-environment/compose.yaml up -d --wait
 ```
 

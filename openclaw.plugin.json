@@ -1,11 +1,19 @@
 {
   "id": "ridian",
   "name": "Ridian",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Connect calendars, tasks, contacts and mail through Ridian MCP and your delegated permissions.",
-  "categories": ["productivity"],
-  "activation": { "onStartup": false },
-  "configSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+  "categories": [
+    "productivity"
+  ],
+  "activation": {
+    "onStartup": false
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
   "mcpServers": {
     "ridian": {
       "url": "https://api.getridian.com/mcp",

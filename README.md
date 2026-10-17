@@ -1,6 +1,6 @@
-# Ridian for OpenClaw
+# Ridian for OpenClaw — calendars, tasks, contacts and email
 
-[Deutsch](https://github.com/kalender-sync/openclaw-ridian/blob/main/docs/setup.de.md)
+[Deutsch](https://github.com/getridian/openclaw-ridian/blob/main/docs/setup.de.md)
 
 Connect OpenClaw to the existing Ridian MCP service. Calendars, availability,
 tasks, contacts, syncs and Agent Mailbox tools come directly from Ridian.
@@ -8,20 +8,33 @@ The tools you can use depend on your authorization, connected providers and
 selected resources. This plugin uses OpenClaw's native MCP client and OAuth
 storage; it does not implement a second API or keep its own token store.
 
-**Alpha — 0.1.0-alpha.1.**
+**Alpha — 0.1.0-alpha.2.**
+
+[Ridian](https://getridian.com/?utm_source=openclaw-plugin&utm_medium=referral&utm_campaign=openclaw&utm_content=readme-en)
+· [ClawHub](https://clawhub.ai/getridian/plugins/openclaw-ridian)
+· [Releases](https://github.com/getridian/openclaw-ridian/releases)
+· [Issues](https://github.com/getridian/openclaw-ridian/issues)
+
+## Moving from the first alpha
+
+The maintained package is now `@getridian/openclaw-ridian`. The first alpha
+used `@kalender-sync/openclaw-ridian`; its archive remains available. The runtime
+plugin ID is still `ridian`. Keep your existing MCP connection and OAuth grant;
+install the new package into the same intended profile rather than configuring
+a second connection. Review `openclaw plugins list` after replacing the plugin.
 
 ## Install from this checkout
 
 Use OpenClaw **2026.10.4**, with Node **24.16+ below 25, or 26.1+**. Run these
 commands in this package directory. Keep your existing OpenClaw profile selected.
-Obtain the standalone source with `git clone https://github.com/kalender-sync/openclaw-ridian.git`
+Obtain the standalone source with `git clone https://github.com/getridian/openclaw-ridian.git`
 and `cd openclaw-ridian`.
 
 ```sh
 npm test
 npm run check:package
 npm pack --ignore-scripts
-openclaw plugins install ./kalender-sync-openclaw-ridian-0.1.0-alpha.1.tgz --force --accept-capabilities
+openclaw plugins install ./getridian-openclaw-ridian-0.1.0-alpha.2.tgz --force --accept-capabilities
 ```
 
 The package has no runtime dependencies apart from the OpenClaw host. Its
