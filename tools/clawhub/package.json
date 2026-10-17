@@ -1,0 +1,8 @@
+{
+  "name": "openclaw-ridian-release-tools",
+  "private": true,
+  "description": "Locked release tooling. Install with npm ci --ignore-scripts; never npx.",
+  "dependencies": {
+    "clawhub": "0.23.3"
+  }
+}

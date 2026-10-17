@@ -9,6 +9,12 @@ requires Paul’s approval and only accepts version tags. The publishing job use
 GitHub OIDC to obtain a short-lived, package/version-specific credential. No
 ClawHub token is stored in GitHub. A failed OIDC exchange fails the job.
 
+The ClawHub CLI runs only from `tools/clawhub/package-lock.json`, installed with
+`npm ci --ignore-scripts`: every transitive package is pinned with an integrity
+hash and no install script runs in the job that holds the publishing token.
+Update the CLI only through a reviewed change to that lockfile
+(`npm install --package-lock-only --ignore-scripts` in `tools/clawhub`).
+
 ## Prepare and publish
 
 1. Update the version in `package.json`, `openclaw.plugin.json`, and the DE/EN
