@@ -1,0 +1,22 @@
+{
+  "id": "ridian",
+  "name": "Ridian",
+  "version": "0.1.0-alpha.1",
+  "description": "Connect calendars, tasks, contacts and mail through Ridian MCP and your delegated permissions.",
+  "categories": ["productivity"],
+  "activation": { "onStartup": false },
+  "configSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+  "mcpServers": {
+    "ridian": {
+      "url": "https://api.getridian.com/mcp",
+      "transport": "streamable-http",
+      "auth": "oauth",
+      "oauth": {
+        "scope": "openid profile offline_access calendar:read calendar:rsvp calendar:write calendar:manage rooms:read tasks:read tasks:write contacts:read contacts:write mail:send sync:read sync:write feedback:write inbox:read inbox:write inbox:send inbox:manage"
+      },
+      "connectionTimeoutMs": 15000,
+      "requestTimeoutMs": 60000,
+      "sslVerify": true
+    }
+  }
+}
