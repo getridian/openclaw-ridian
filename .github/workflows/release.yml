@@ -34,14 +34,17 @@ jobs:
           JS
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+      - name: Install locked release tooling
+        # Exact lockfile with integrity hashes and no install scripts; never npx.
+        run: npm ci --prefix tools/clawhub --ignore-scripts --no-audit --no-fund
       - name: Package and inspect the published files
         run: |
           mkdir -p "$RUNNER_TEMP/release" "$RUNNER_TEMP/unpacked"
           npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP/release"
           tar -xzf "$RUNNER_TEMP"/release/*.tgz -C "$RUNNER_TEMP/unpacked"
-          npx --yes clawhub@0.23.3 package validate "$RUNNER_TEMP/unpacked/package" \
+          tools/clawhub/node_modules/.bin/clawhub package validate "$RUNNER_TEMP/unpacked/package" \
             --openclaw-version 2026.10.4 --out "$RUNNER_TEMP/inspector" --json
-          npx --yes clawhub@0.23.3 package publish "$RUNNER_TEMP/unpacked/package" \
+          tools/clawhub/node_modules/.bin/clawhub package publish "$RUNNER_TEMP/unpacked/package" \
             --source-repo "$GITHUB_REPOSITORY" \
             --source-commit "$GITHUB_SHA" --source-ref "$GITHUB_REF" \
             --tags alpha --dry-run --json
@@ -65,9 +68,16 @@ jobs:
       contents: read
       id-token: write
     steps:
+      # Only the locked tool manifest is used from the checkout; the package comes from prepare.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: tools/clawhub
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24'
+      - name: Install locked release tooling
+        run: npm ci --prefix tools/clawhub --ignore-scripts --no-audit --no-fund
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: release-package
@@ -76,7 +86,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/unpacked"
           tar -xzf "$RUNNER_TEMP"/release/*.tgz -C "$RUNNER_TEMP/unpacked"
-          npx --yes clawhub@0.23.3 package publish "$RUNNER_TEMP/unpacked/package" \
+          tools/clawhub/node_modules/.bin/clawhub package publish "$RUNNER_TEMP/unpacked/package" \
             --source-repo "$GITHUB_REPOSITORY" \
             --source-commit "$GITHUB_SHA" --source-ref "$GITHUB_REF" \
             --tags alpha --wait --wait-timeout 900 --json \
