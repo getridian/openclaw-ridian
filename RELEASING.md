@@ -1,8 +1,8 @@
 # Release preparation
 
-Maintainer: Ridian. Repository name: `kalender-sync/openclaw-ridian`. License:
-MIT. Package name: `@kalender-sync/openclaw-ridian`, runtime plugin ID: `ridian`.
-The ClawHub publisher must control the matching `kalender-sync` namespace.
+Maintainer: Ridian. Repository name: `getridian/openclaw-ridian`. License:
+MIT. Package name: `@getridian/openclaw-ridian`, runtime plugin ID: `ridian`.
+The ClawHub publisher must control the matching `getridian` namespace.
 Confirm that ownership before publishing or change the package scope consistently.
 
 Use this standalone repository, not a checkout of another product. Source
@@ -12,7 +12,7 @@ credentials and environment-specific evidence out of the repository and archive.
 1. Run `npm test` and `npm run check:package`.
 2. Run the isolated host test from `test-environment/README.md` with the pinned
    OpenClaw image. Test any other host version before extending compatibility.
-3. Generate the archive with `npm pack --ignore-scripts`; inspect its seven-file
+3. Generate the archive with `npm pack --ignore-scripts`; inspect its eight-file
    allowlist and install that exact archive in the isolated environment.
 4. Verify human OAuth, tool discovery and one read through the real host.
    This adapter reuses the existing Ridian MCP handlers and OpenClaw OAuth
@@ -25,8 +25,8 @@ credentials and environment-specific evidence out of the repository and archive.
 
    ```sh
    npx --yes clawhub@0.23.3 package validate /path/to/extracted/package
-   npx --yes clawhub@0.23.3 package publish . --owner kalender-sync \
-     --source-repo kalender-sync/openclaw-ridian \
+   npx --yes clawhub@0.23.3 package publish . --owner getridian \
+     --source-repo getridian/openclaw-ridian \
      --source-commit YOUR_REVIEWED_COMMIT --dry-run
    ```
 

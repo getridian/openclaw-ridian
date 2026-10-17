@@ -1,6 +1,6 @@
-# Ridian für OpenClaw
+# Ridian für OpenClaw — Kalender, Aufgaben, Kontakte und E-Mail
 
-[English](https://github.com/kalender-sync/openclaw-ridian/blob/main/README.md)
+[English](https://github.com/getridian/openclaw-ridian/blob/main/README.md)
 
 Das Plugin verbindet OpenClaw mit dem bestehenden Ridian-MCP. Kalender,
 Verfügbarkeit, Aufgaben, Kontakte, Syncs und Agent Mailbox kommen direkt von
@@ -8,12 +8,25 @@ Ridian. Verfügbare Werkzeuge hängen von Freigaben, verbundenen Anbietern und
 ausgewählten Ressourcen ab. OpenClaw übernimmt MCP und die OAuth-Speicherung;
 das Plugin implementiert weder eine zweite API noch einen eigenen Tokenspeicher.
 
-**Alpha — 0.1.0-alpha.1.**
+**Alpha — 0.1.0-alpha.2.**
+
+[Ridian](https://getridian.com/de/?utm_source=openclaw-plugin&utm_medium=referral&utm_campaign=openclaw&utm_content=readme-de)
+· [ClawHub](https://clawhub.ai/getridian/plugins/openclaw-ridian)
+· [Releases](https://github.com/getridian/openclaw-ridian/releases)
+· [Fehler melden](https://github.com/getridian/openclaw-ridian/issues)
+
+## Wechsel von der ersten Alpha
+
+Das gepflegte Paket heißt jetzt `@getridian/openclaw-ridian`. Die erste Alpha
+hieß `@kalender-sync/openclaw-ridian`; ihr Archiv bleibt verfügbar. Die Plugin-ID
+bleibt `ridian`. Behalte deine bestehende MCP-Verbindung und OAuth-Freigabe.
+Installiere das neue Paket im gewünschten bisherigen Profil und richte keine
+zweite Verbindung ein. Prüfe danach `openclaw plugins list`.
 
 ## Aus diesem Checkout installieren
 
 Voraussetzung: OpenClaw **2026.10.4**, Node **ab 24.16 unter 25 oder ab 26.1**.
-Quellcode mit `git clone https://github.com/kalender-sync/openclaw-ridian.git`
+Quellcode mit `git clone https://github.com/getridian/openclaw-ridian.git`
 und `cd openclaw-ridian` holen. Im Paketverzeichnis und mit dem gewünschten
 OpenClaw-Profil ausführen:
 
@@ -21,7 +34,7 @@ OpenClaw-Profil ausführen:
 npm test
 npm run check:package
 npm pack --ignore-scripts
-openclaw plugins install ./kalender-sync-openclaw-ridian-0.1.0-alpha.1.tgz --force --accept-capabilities
+openclaw plugins install ./getridian-openclaw-ridian-0.1.0-alpha.2.tgz --force --accept-capabilities
 ```
 
 Außer OpenClaw benötigt das Paket keine Laufzeitabhängigkeiten. Das native
