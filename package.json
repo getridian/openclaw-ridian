@@ -1,6 +1,6 @@
 {
   "name": "@getridian/openclaw-ridian",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "description": "OpenClaw plugin for Ridian calendars, tasks, contacts and email through MCP and OAuth.",
   "type": "module",
   "license": "MIT",

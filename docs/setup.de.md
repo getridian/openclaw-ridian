@@ -8,7 +8,7 @@ Ridian. Verfügbare Werkzeuge hängen von Freigaben, verbundenen Anbietern und
 ausgewählten Ressourcen ab. OpenClaw übernimmt MCP und die OAuth-Speicherung;
 das Plugin implementiert weder eine zweite API noch einen eigenen Tokenspeicher.
 
-**Alpha — 0.1.0-alpha.2.**
+**Alpha — 0.1.0-alpha.3.**
 
 [Ridian](https://getridian.com/de/?utm_source=openclaw-plugin&utm_medium=referral&utm_campaign=openclaw&utm_content=readme-de)
 · [ClawHub](https://clawhub.ai/getridian/plugins/openclaw-ridian)
@@ -34,7 +34,7 @@ OpenClaw-Profil ausführen:
 npm test
 npm run check:package
 npm pack --ignore-scripts
-openclaw plugins install ./getridian-openclaw-ridian-0.1.0-alpha.2.tgz --force --accept-capabilities
+openclaw plugins install ./getridian-openclaw-ridian-0.1.0-alpha.3.tgz --force --accept-capabilities
 ```
 
 Außer OpenClaw benötigt das Paket keine Laufzeitabhängigkeiten. Das native

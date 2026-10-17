@@ -1,42 +1,63 @@
-# Release preparation
+# Publishing a Ridian plugin release
 
-Maintainer: Ridian. Repository name: `getridian/openclaw-ridian`. License:
-MIT. Package name: `@getridian/openclaw-ridian`, runtime plugin ID: `ridian`.
-The ClawHub publisher must control the matching `getridian` namespace.
-Confirm that ownership before publishing or change the package scope consistently.
+Release source: `getridian/openclaw-ridian`. Package:
+`@getridian/openclaw-ridian`; runtime ID: `ridian`; license: MIT.
 
-Use this standalone repository, not a checkout of another product. Source
-provenance must identify this repository's exact reviewed commit. Keep private
-credentials and environment-specific evidence out of the repository and archive.
+ClawHub Trusted Publishing binds this package to this repository's
+`release.yml` workflow and the GitHub environment `clawhub`. That environment
+requires Paul’s approval and only accepts version tags. The publishing job uses
+GitHub OIDC to obtain a short-lived, package/version-specific credential. No
+ClawHub token is stored in GitHub. A failed OIDC exchange fails the job.
 
-1. Run `npm test` and `npm run check:package`.
-2. Run the isolated host test from `test-environment/README.md` with the pinned
-   OpenClaw image. Test any other host version before extending compatibility.
-3. Generate the archive with `npm pack --ignore-scripts`; inspect its eight-file
-   allowlist and install that exact archive in the isolated environment.
-4. Verify human OAuth, tool discovery and one read through the real host.
-   This adapter reuses the existing Ridian MCP handlers and OpenClaw OAuth
-   implementation. Repeat deeper contract tests when those integration surfaces
-   change; do not make unchanged server workflows a separate plugin release gate.
-   Record the actual test scope in release evidence.
-5. Create/review the standalone repository commit. Run the pinned ClawHub CLI
-   from that checkout. Validation accepts a folder, not a `.tgz` path; extract
-   the archive into a fresh temporary directory to validate the installed files:
+## Prepare and publish
+
+1. Update the version in `package.json`, `openclaw.plugin.json`, and the DE/EN
+   installation examples. Keep Alpha versions on the `alpha` channel.
+2. Run `npm test`, `npm run check:package`, and the isolated host test from
+   `test-environment/README.md`. Review the eight-file archive allowlist.
+   Repeat real OAuth/tool tests when the adapter or host contract changes;
+   document the actual scope rather than claiming unchanged server workflows
+   were tested again.
+3. Merge the reviewed PR through the required Node 24/26 and secret-scan checks.
+   Tag its merged commit `vVERSION` and push that tag.
+4. Dispatch the release workflow **at that tag**, not at `main`:
 
    ```sh
-   npx --yes clawhub@0.23.3 package validate /path/to/extracted/package
-   npx --yes clawhub@0.23.3 package publish . --owner getridian \
-     --source-repo getridian/openclaw-ridian \
-     --source-commit YOUR_REVIEWED_COMMIT --dry-run
+   gh workflow run release.yml --repo getridian/openclaw-ridian --ref vVERSION
    ```
 
-6. Review the DE/EN descriptions, package, source commit and publish owner with
-   Paul. After his publication instruction, publish the reviewed version with
-   the same explicit source metadata, using `--wait` instead of `--dry-run`.
-   ClawHub's checks determine when the version becomes installable. Do not
-   describe a pending upload as publicly available.
-7. Verify installation from the resulting ClawHub listing in a fresh profile,
-   then record the release and update the Ridian integration documentation.
+   ClawHub accepts OIDC publishing from `workflow_dispatch`. A tag push alone
+   does not publish. The workflow checks the tag/version, verifies that the
+   commit belongs to `main`, checks the package, runs Plugin Inspector and a
+   publish dry run, then waits for the protected environment approval.
+5. Review the exact commit, package artifact and Inspector report. Approve the
+   `clawhub` deployment after the release is authorized. The publishing job
+   downloads the reviewed artifact and waits for ClawHub's security checks.
+6. Verify the ClawHub receipt, source commit and GitHub publishing identity.
+   Download the public version and compare its SHA-256 with the workflow
+   artifact. Install that public version in a fresh OpenClaw profile.
+7. Attach the verified archive to a GitHub prerelease for the same tag and record
+   the release evidence. Keep the previous versions available.
 
-Keep publishing manual for the first release. A local Plugin Inspector pass is
-not a ClawHub review, a namespace claim, an OAuth acceptance test or a release.
+## Recovery
+
+A timeout does not mean the upload failed. Inspect the attempt ID before
+retrying; do not upload a second copy of a pending version. A blocked or failed
+attempt needs its cause resolved first. Do not add a persistent token or use a
+manual override to bypass OIDC. A package manager can inspect the binding with:
+
+```sh
+npx --yes clawhub@0.23.3 package trusted-publisher get @getridian/openclaw-ridian
+```
+
+Deleting that binding stops new OIDC credentials; it does not unpublish an
+existing release. Treat changes to the binding, workflow or environment as
+release security changes.
+
+## What the proof means
+
+Trusted Publishing identifies the GitHub repository, workflow and commit that
+published the package. It does not confer OpenClaw's Official status. OpenClaw
+2026.10.4 reserves its trusted runtime classification for its official catalog;
+a community plugin can load successfully while reporting `provenance-invalid`.
+Do not edit local trust records or suppress that warning to claim official trust.
